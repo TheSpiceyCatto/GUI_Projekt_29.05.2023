@@ -1,17 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Circle extends JComponent {
-    int x, y, r;
-    public Circle(int x, int y){
-        this.x = x;
-        this.y = y;
-        r = 100;
-        setPreferredSize(new Dimension(r, r));
+public class Circle extends Shape {
+    public Circle(int x, int y, Color color){
+        super(x, y, 100, color);
     }
 
     @Override
     public void paintComponent(Graphics g){
+        g.setColor(color);
         g.fillOval(x, y, r, r);
     }
 }
