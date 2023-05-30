@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class Project {
     public static void main(String[] args) {
@@ -19,6 +16,11 @@ public class Project {
         jFrame.setLayout(new BorderLayout());
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        Canvas drawArea = new Canvas();
+
+        JLabel shapeStatus = new JLabel("Circle");
+        JLabel fileStatus = new JLabel("New");
+
         JMenuBar jMenuBar = new JMenuBar();
         JMenu jMenuFile = new JMenu("File");
 
@@ -30,6 +32,7 @@ public class Project {
         saveAsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK + InputEvent.ALT_DOWN_MASK));
         JMenuItem quitItem = new JMenuItem("Quit", KeyEvent.VK_Q);
         quitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
+        quitItem.addActionListener(e -> jFrame.dispatchEvent(new WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING)));
 
         jMenuFile.add(openItem);
         jMenuFile.add(saveItem);
@@ -39,21 +42,31 @@ public class Project {
 
         JMenu jMenuDraw = new JMenu("Draw");
 
+
         JMenu figureMenu = new JMenu("Figure");
         ButtonGroup buttonGroup = new ButtonGroup();
         figureMenu.setMnemonic(KeyEvent.VK_F);
         JRadioButtonMenuItem circleButton = new JRadioButtonMenuItem("Circle");
         circleButton.setMnemonic(KeyEvent.VK_C);
         circleButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
-        circleButton.addActionListener(e -> Canvas.setCurrentShape(Shapes.Circle));
+        circleButton.addActionListener(e -> {
+            Canvas.setCurrentShape(Shapes.Circle);
+            shapeStatus.setText("Circle");
+        });
         JRadioButtonMenuItem squareButton = new JRadioButtonMenuItem("Square");
         squareButton.setMnemonic(KeyEvent.VK_R);
         squareButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK));
-        squareButton.addActionListener(e -> Canvas.setCurrentShape(Shapes.Square));
+        squareButton.addActionListener(e -> {
+            Canvas.setCurrentShape(Shapes.Square);
+            shapeStatus.setText("Square");
+        });
         JRadioButtonMenuItem penButton = new JRadioButtonMenuItem("Pen");
         penButton.setMnemonic(KeyEvent.VK_P);
         penButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
-        penButton.addActionListener(e -> Canvas.setCurrentShape(Shapes.Pen));
+        penButton.addActionListener(e -> {
+            Canvas.setCurrentShape(Shapes.Pen);
+            shapeStatus.setText("Pen");
+        });
         buttonGroup.add(circleButton);
         buttonGroup.add(squareButton);
         buttonGroup.add(penButton);
@@ -70,6 +83,7 @@ public class Project {
         });
         JMenuItem clearItem = new JMenuItem("Clear", KeyEvent.VK_C);
         clearItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK + InputEvent.SHIFT_DOWN_MASK));
+        clearItem.addActionListener(e -> drawArea.clear());
 
         jMenuDraw.add(figureMenu);
         jMenuDraw.add(colorItem);
@@ -81,12 +95,9 @@ public class Project {
 
         JToolBar statusBar = new JToolBar();
         statusBar.setLayout(new BorderLayout());
-        JLabel shapeStatus = new JLabel("Status");
-        JLabel fileStatus = new JLabel("New");
         statusBar.add(shapeStatus, BorderLayout.WEST);
         statusBar.add(fileStatus, BorderLayout.EAST);
 
-        Canvas drawArea = new Canvas();
 
         jFrame.add(drawArea, BorderLayout.CENTER);
         jFrame.add(statusBar, BorderLayout.SOUTH);

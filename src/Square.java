@@ -1,10 +1,10 @@
-import javax.swing.*;
 import java.awt.*;
 
 public class Square extends Shape {
     public Square(int x, int y, Color color){
-        super(x, y, 100, color);
+        super(x, y, 25, color);
     }
+
 
     @Override
     public void paintComponent(Graphics g){

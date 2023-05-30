@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Shape extends JComponent {
+public class Shape extends JComponent {
     protected int x, y, r;
     protected Color color;
     public Shape(int x, int y, int r, Color color){

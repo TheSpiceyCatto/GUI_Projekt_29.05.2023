@@ -1,9 +1,8 @@
-import javax.swing.*;
 import java.awt.*;
 
 public class Circle extends Shape {
     public Circle(int x, int y, Color color){
-        super(x, y, 100, color);
+        super(x, y, 25, color);
     }
 
     @Override
