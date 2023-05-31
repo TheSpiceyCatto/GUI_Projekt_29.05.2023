@@ -121,12 +121,7 @@ public class Canvas extends JPanel {
     }
 
     private void deleteShapes(int x, int y){
-        Iterator<Shape> it = shapes.iterator();
-        while (it.hasNext()){
-            Shape shape = it.next();
-            if (Math.abs(shape.x + shape.getR() - x) <= shape.getR() && Math.abs(shape.y + shape.getR() - y) <= shape.getR())
-                it.remove();
-        }
+        shapes.removeIf(shape -> Math.abs(shape.x + shape.getR() - x) <= shape.getR() && Math.abs(shape.y + shape.getR() - y) <= shape.getR());
         repaint();
     }
     public void clear(){
