@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 enum Shapes{
     Circle,
@@ -11,21 +12,21 @@ enum Shapes{
 }
 
 public class Canvas extends JPanel {
-    private JLabel jLabel;
     private static ArrayList<Shape> shapes;
     private static Pen pen;
     private Point shapePosition;
     private static Shapes currentShape;
     private static Color color;
+    private boolean dPressed = false;
 
     public Canvas(JLabel jLabel) {
-        this.jLabel = jLabel;
         shapePosition = new Point();
         setFocusable(true);
         currentShape = Shapes.Circle;
         shapes = new ArrayList<>();
         pen = new Pen(5);
         color = Color.black;
+
         KeyAdapter keyAdapter = new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -38,6 +39,14 @@ public class Canvas extends JPanel {
                     }
                     repaint();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_D)
+                    dPressed = true;
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e){
+                if (e.getKeyCode() == KeyEvent.VK_D)
+                    dPressed = false;
             }
         };
         MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -51,6 +60,9 @@ public class Canvas extends JPanel {
                     jLabel.setText("Modified");
                     pen.draw(getGraphics(), x, y, color);
                     shapes.add(p);
+                }
+                if (dPressed){
+                    deleteShapes(x, y);
                 }
             }
 
@@ -108,6 +120,15 @@ public class Canvas extends JPanel {
         repaint();
     }
 
+    private void deleteShapes(int x, int y){
+        Iterator<Shape> it = shapes.iterator();
+        while (it.hasNext()){
+            Shape shape = it.next();
+            if (Math.abs(shape.x + shape.getR() - x) <= shape.getR() && Math.abs(shape.y + shape.getR() - y) <= shape.getR())
+                it.remove();
+        }
+        repaint();
+    }
     public void clear(){
         shapes = new ArrayList<>();
         repaint();

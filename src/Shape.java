@@ -14,4 +14,8 @@ public class Shape extends JComponent {
     public void paintComponent(Graphics g){
         g.setColor(color);
     }
+
+    public int getR() {
+        return r;
+    }
 }

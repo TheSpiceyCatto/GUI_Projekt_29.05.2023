@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c444dba-55e1-4dd3-a268-a2be07571f5f" name="Changes" comment="Added Pen and Clear">
+    <list default="true" id="4c444dba-55e1-4dd3-a268-a2be07571f5f" name="Changes" comment="Saving and loading">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Canvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Canvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PenPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PenPoint.java" afterDir="false" />
@@ -72,7 +72,7 @@
       <workItem from="1685388298992" duration="8955000" />
       <workItem from="1685446653470" duration="8609000" />
       <workItem from="1685465320530" duration="11914000" />
-      <workItem from="1685541240597" duration="9242000" />
+      <workItem from="1685541240597" duration="11601000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1685388608842</created>
@@ -109,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685480288383</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Saving and loading">
+      <created>1685563859146</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685563859146</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +128,7 @@
     <MESSAGE value="Created classes" />
     <MESSAGE value="Added Shapes and Colors" />
     <MESSAGE value="Added Pen and Clear" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Pen and Clear" />
+    <MESSAGE value="Saving and loading" />
+    <option name="LAST_COMMIT_MESSAGE" value="Saving and loading" />
   </component>
 </project>

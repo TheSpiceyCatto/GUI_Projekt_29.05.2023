@@ -138,6 +138,7 @@ public class Project {
         jFrame.setJMenuBar(jMenuBar);
         jFrame.setSize(500, 500);
         jFrame.setResizable(true);
+        jFrame.pack();
         jFrame.setVisible(true);
     }
 }
