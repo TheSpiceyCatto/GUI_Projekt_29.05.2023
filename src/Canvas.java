@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Line2D;
+import java.io.*;
 import java.util.ArrayList;
 
 enum Shapes{
@@ -11,32 +11,30 @@ enum Shapes{
 }
 
 public class Canvas extends JPanel {
-
-    private static ArrayList<Circle> circles;
-    private static ArrayList<Square> squares;
-    private static ArrayList<PenPoint> points;
+    private JLabel jLabel;
+    private static ArrayList<Shape> shapes;
     private static Pen pen;
     private Point shapePosition;
     private static Shapes currentShape;
     private static Color color;
 
-    public Canvas() {
+    public Canvas(JLabel jLabel) {
+        this.jLabel = jLabel;
         shapePosition = new Point();
         setFocusable(true);
         currentShape = Shapes.Circle;
-        circles = new ArrayList<>();
-        squares = new ArrayList<>();
-        points = new ArrayList<>();
+        shapes = new ArrayList<>();
         pen = new Pen(5);
         color = Color.black;
         KeyAdapter keyAdapter = new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    jLabel.setText("Modified");
                     Color shapeCol = new Color((int) (Math.random() * 255 + 1), (int) (Math.random() * 255 + 1), (int) (Math.random() * 255 + 1));
                     switch (currentShape) {
-                        case Circle -> circles.add(new Circle(shapePosition.x, shapePosition.y, shapeCol));
-                        case Square -> squares.add(new Square(shapePosition.x, shapePosition.y, shapeCol));
+                        case Circle -> shapes.add(new Circle(shapePosition.x, shapePosition.y, shapeCol));
+                        case Square -> shapes.add(new Square(shapePosition.x, shapePosition.y, shapeCol));
                     }
                     repaint();
                 }
@@ -46,27 +44,25 @@ public class Canvas extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                PenPoint p = new PenPoint();
-                p.setPoint(e.getPoint());
-                p.setColor(color);
                 int x = e.getX();
                 int y = e.getY();
+                PenPoint p = new PenPoint(x, y, pen.getSize(), color);
                 if (currentShape == Shapes.Pen){
+                    jLabel.setText("Modified");
                     pen.draw(getGraphics(), x, y, color);
-                    points.add(p);
+                    shapes.add(p);
                 }
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                PenPoint p = new PenPoint();
-                p.setPoint(e.getPoint());
-                p.setColor(color);
                 int x = e.getX();
                 int y = e.getY();
+                PenPoint p = new PenPoint(x, y, pen.getSize(), color);
                 if (currentShape == Shapes.Pen){
+                    jLabel.setText("Modified");
                     pen.draw(getGraphics(), x, y, color);
-                    points.add(p);
+                    shapes.add(p);
                 }
             }
 
@@ -83,25 +79,37 @@ public class Canvas extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (circles != null) {
-            for (Circle e : circles){
+        if (shapes != null) {
+            for (Shape e : shapes)
                 e.paintComponent(g);
-            }
-        }
-        if (squares != null) {
-            for (Square e : squares)
-                e.paintComponent(g);
-        }
-        if (points != null){
-            for (PenPoint p : points)
-                pen.draw(g, p.getPoint().x, p.getPoint().y, p.getColor());
         }
     }
 
+    public void save(File file){
+        try (FileOutputStream fileOut = new FileOutputStream(file)){
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(shapes);
+        } catch (IOException e){
+            System.out.println("File Output Error");
+        }
+    }
+
+    public void load(File file){
+        try (FileInputStream fileIn = new FileInputStream(file)){
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            try {
+                shapes = (ArrayList<Shape>) objectIn.readObject();
+            } catch (ClassNotFoundException c){
+                System.out.println("Class Not Found In File");
+            }
+        } catch (IOException e){
+            System.out.println("File Input Error");
+        }
+        repaint();
+    }
+
     public void clear(){
-        circles = new ArrayList<>();
-        squares = new ArrayList<>();
-        points = new ArrayList<>();
+        shapes = new ArrayList<>();
         repaint();
     }
 

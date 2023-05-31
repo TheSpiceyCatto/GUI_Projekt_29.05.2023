@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c444dba-55e1-4dd3-a268-a2be07571f5f" name="Changes" comment="Added Shapes and Colors">
-      <change afterPath="$PROJECT_DIR$/src/PenPoint.java" afterDir="false" />
+    <list default="true" id="4c444dba-55e1-4dd3-a268-a2be07571f5f" name="Changes" comment="Added Pen and Clear">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Canvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Canvas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Circle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PenPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PenPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Square.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +71,8 @@
       <workItem from="1685387848761" duration="2000" />
       <workItem from="1685388298992" duration="8955000" />
       <workItem from="1685446653470" duration="8609000" />
-      <workItem from="1685465320530" duration="11874000" />
+      <workItem from="1685465320530" duration="11914000" />
+      <workItem from="1685541240597" duration="9242000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1685388608842</created>
@@ -104,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685455050153</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Pen and Clear">
+      <created>1685480288383</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685480288383</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +120,7 @@
     <MESSAGE value="Added UI" />
     <MESSAGE value="Created classes" />
     <MESSAGE value="Added Shapes and Colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Shapes and Colors" />
+    <MESSAGE value="Added Pen and Clear" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Pen and Clear" />
   </component>
 </project>

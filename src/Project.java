@@ -11,25 +11,58 @@ public class Project {
         SwingUtilities.invokeLater(this::createGUI);
     }
 
-    private void createGUI(){
+    private void createGUI() {
         JFrame jFrame = new JFrame("Simple Draw");
         jFrame.setLayout(new BorderLayout());
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Canvas drawArea = new Canvas();
-
         JLabel shapeStatus = new JLabel("Circle");
         JLabel fileStatus = new JLabel("New");
+
+        Canvas drawArea = new Canvas(fileStatus);
+
 
         JMenuBar jMenuBar = new JMenuBar();
         JMenu jMenuFile = new JMenu("File");
 
         JMenuItem openItem = new JMenuItem("Open", KeyEvent.VK_O);
+        JFileChooser jFileChooser = new JFileChooser();
         openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+        openItem.addActionListener(e -> {
+            if (JFileChooser.APPROVE_OPTION == jFileChooser.showOpenDialog(jFrame)) {
+                if (jFileChooser.getSelectedFile().exists()) {
+                    fileStatus.setText("Saved");
+                    drawArea.load(jFileChooser.getSelectedFile());
+                } else {
+                    fileStatus.setText("New");
+                    drawArea.clear();
+                }
+            }
+        });
+        jFileChooser.addActionListener(e -> {
+            if (jFileChooser.getSelectedFile() != null)
+                jFrame.setTitle("Simple Draw: " + jFileChooser.getSelectedFile().getName());
+        });
         JMenuItem saveItem = new JMenuItem("Save", KeyEvent.VK_S);
         saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+        saveItem.addActionListener(e -> {
+            if (jFileChooser.getSelectedFile() == null) {
+                if (JFileChooser.APPROVE_OPTION == jFileChooser.showSaveDialog(jFrame)) {
+                    drawArea.save(jFileChooser.getSelectedFile());
+                    fileStatus.setText("Saved");
+                }
+            } else {
+                drawArea.save(jFileChooser.getSelectedFile());
+            }
+        });
         JMenuItem saveAsItem = new JMenuItem("Save As...", KeyEvent.VK_A);
         saveAsItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK + InputEvent.ALT_DOWN_MASK));
+        saveAsItem.addActionListener(e -> {
+            if (JFileChooser.APPROVE_OPTION == jFileChooser.showSaveDialog(jFrame)) {
+                fileStatus.setText("Saved");
+                drawArea.save(jFileChooser.getSelectedFile());
+            }
+        });
         JMenuItem quitItem = new JMenuItem("Quit", KeyEvent.VK_Q);
         quitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
         quitItem.addActionListener(e -> jFrame.dispatchEvent(new WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING)));
@@ -47,6 +80,7 @@ public class Project {
         ButtonGroup buttonGroup = new ButtonGroup();
         figureMenu.setMnemonic(KeyEvent.VK_F);
         JRadioButtonMenuItem circleButton = new JRadioButtonMenuItem("Circle");
+        circleButton.doClick();
         circleButton.setMnemonic(KeyEvent.VK_C);
         circleButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
         circleButton.addActionListener(e -> {
@@ -77,7 +111,7 @@ public class Project {
         colorItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.ALT_DOWN_MASK + InputEvent.SHIFT_DOWN_MASK));
         colorItem.addActionListener(e -> {
             Color selectedColor = JColorChooser.showDialog(jFrame, "Pick Color", Canvas.getColor());
-            if(selectedColor != null){
+            if (selectedColor != null) {
                 Canvas.setColor(selectedColor);
             }
         });

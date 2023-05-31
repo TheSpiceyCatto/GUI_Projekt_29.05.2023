@@ -11,4 +11,7 @@ public class Shape extends JComponent {
         this.y = y - (int)(r * 0.5);
         setPreferredSize(new Dimension(r, r));
     }
+    public void paintComponent(Graphics g){
+        g.setColor(color);
+    }
 }
